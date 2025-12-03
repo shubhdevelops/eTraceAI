@@ -1,0 +1,7 @@
+DEV_NAME = "Shubham Thakur"
+DEV_DEGREE = "B.Tech Biotechnology"
+DEV_INSTITUTE = "National Institute of Technology Raipur"
+DEV_TEAM = "CRISPR_CREW"
+DEV_EVENT = "Smart India Hackathon Grand Finale 2025"
+DEV_EMAIL = "nitian.shubh@gmail.com"
+DEV_INSTAGRAM = "@shhubhm"

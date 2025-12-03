@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+
+# Streamlit
+.streamlit/
+
+# Cache
+cache/
+output/
+
+# Virtual env
+env/
+venv/
+.venv/
+
+# OS crap
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
