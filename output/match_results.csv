@@ -1,0 +1,21 @@
+SampleID,MatchedID,Organism,Lineage,Score
+Read_1,NR_074513.2,Ehrlichia ruminantium,Bacteria Pseudomonadati Pseudomonadota Alphaproteobacteria Rickettsiales Anaplasmataceae Ehrlichia.,0.315
+Read_2,NR_109054.1,Aurantiacibacter marinus,Bacteria Pseudomonadati Pseudomonadota Alphaproteobacteria Sphingomonadales Erythrobacteraceae Aurantiacibacter.,0.297
+Read_3,NR_181894.1,Kitasatospora humi,Bacteria Bacillati Actinomycetota Actinomycetes Kitasatosporales Streptomycetaceae Kitasatospora.,0.289
+Read_4,NR_132391.1,Sungkyunkwania multivorans,Bacteria Pseudomonadati Bacteroidota Flavobacteriia Flavobacteriales Flavobacteriaceae Sungkyunkwania.,0.307
+Read_5,NR_181373.1,Campylobacter massiliensis,Bacteria Pseudomonadati Campylobacterota Epsilonproteobacteria Campylobacterales Campylobacteraceae Campylobacter.,0.288
+Read_6,NR_181205.1,Thiomicrorhabdus xiamenensis,Bacteria Pseudomonadati Pseudomonadota Gammaproteobacteria Thiotrichales Piscirickettsiaceae Thiomicrorhabdus.,0.262
+Read_7,NR_156959.1,Tessaracoccus arenae,Bacteria Bacillati Actinomycetota Actinomycetes Propionibacteriales Propionibacteriaceae Tessaracoccus.,0.225
+Read_8,NR_180311.1,Peptacetobacter hominis,Bacteria Bacillati Bacillota Clostridia Peptostreptococcales Peptostreptococcaceae Peptacetobacter.,0.266
+Read_9,NR_180930.1,Chitinophaga fulva,Bacteria Pseudomonadati Bacteroidota Chitinophagia Chitinophagales Chitinophagaceae Chitinophaga.,0.334
+Read_10,NG_042881.1,Helicobacter fennelliae,Bacteria Pseudomonadati Campylobacterota Epsilonproteobacteria Campylobacterales Helicobacteraceae Helicobacter.,0.323
+Read_11,NR_175428.1,Paracoccus tegillarcae,Bacteria Pseudomonadati Pseudomonadota Alphaproteobacteria Rhodobacterales Paracoccaceae Paracoccus.,0.255
+Read_12,NR_026034.1,Mycoplasmopsis adleri,Bacteria Bacillati Mycoplasmatota Mycoplasmoidales Metamycoplasmataceae Mycoplasmopsis.,0.302
+Read_13,NR_180515.1,Paracoccus ravus,Bacteria Pseudomonadati Pseudomonadota Alphaproteobacteria Rhodobacterales Paracoccaceae Paracoccus.,0.334
+Read_14,NR_144600.1,Roseivirga marina,Bacteria Pseudomonadati Bacteroidota Cytophagia Cytophagales Roseivirgaceae Roseivirga.,0.277
+Read_15,NR_133829.1,Pseudooctadecabacter jejudonensis,Bacteria Pseudomonadati Pseudomonadota Alphaproteobacteria Rhodobacterales Paracoccaceae Pseudooctadecabacter.,0.291
+Read_16,NR_044367.1,Balneola alkaliphila,Bacteria Pseudomonadati Balneolota Balneolia Balneolales Balneolaceae Balneola.,0.263
+Read_17,NR_136497.1,Longimonas halophila,Bacteria Pseudomonadati Rhodothermota Rhodothermia Rhodothermales Salisaetaceae Longimonas.,0.338
+Read_18,NR_074854.1,Borreliella bavariensis,Bacteria Pseudomonadati Spirochaetota Spirochaetia Spirochaetales Borreliaceae Borreliella.,0.246
+Read_19,NR_165761.1,Anaerococcus jeddahensis,Bacteria Bacillati Bacillota Tissierellia Tissierellales Peptoniphilaceae Anaerococcus.,0.318
+Read_20,NR_174323.1,Chitinophaga tropicalis,Bacteria Pseudomonadati Bacteroidota Chitinophagia Chitinophagales Chitinophagaceae Chitinophaga.,0.332
