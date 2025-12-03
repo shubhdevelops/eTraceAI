@@ -20,3 +20,20 @@ Thumbs.db
 
 # VS Code
 .vscode/
+
+# Ignore reference databases
+reference_db/
+data/combined_reference.fasta
+
+# Ignore large data
+*.sqlite3
+*.btd
+*.pal
+*.nal
+*.nhr
+*.nin
+*.nsq
+
+# Ignore output + cache
+output/
+cache/
