@@ -37,3 +37,11 @@ data/combined_reference.fasta
 # Ignore output + cache
 output/
 cache/
+
+blast+/
+reference_db/
+*.sqlite3
+*.btd
+*.nhr
+*.nin
+*.nsq
