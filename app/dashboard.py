@@ -6,8 +6,6 @@ import plotly.express as px
 import os
 import subprocess
 
-
-
 from Bio import SeqIO
 
 # =====================================================================
@@ -70,6 +68,7 @@ body {
 }
 </style>
 """, unsafe_allow_html=True)
+
 # =====================================================================
 # HIDE STREAMLIT LOGO / MENU / FOOTER
 # =====================================================================
@@ -83,13 +82,11 @@ header {visibility: hidden;}
 
 
 # =====================================================================
-# SIDEBAR
+# MOBILE-FRIENDLY TOP NAVIGATION (Fix)
 # =====================================================================
-st.sidebar.title("eTraceAI")
-page = st.sidebar.radio(
-    "Navigation",
-    ["Home", "Results", "Visualizations", "FASTA Preview", "Developer Info"]
-)
+nav_options = ["Home", "Results", "Visualizations", "FASTA Preview", "Developer Info"]
+page = st.selectbox("📂 Navigate", nav_options)
+
 
 # Paths
 UPLOAD_PATH = "data/sample1.fasta"
@@ -136,11 +133,9 @@ elif page == "Results":
         df = pd.read_csv(RESULT_CSV)
         st.dataframe(df, use_container_width=True)
 
-        # Download CSV
         csv_bytes = df.to_csv(index=False).encode()
         st.download_button("Download Results CSV", data=csv_bytes, file_name="taxonomy_results.csv")
 
-        # Phylum distribution
         st.markdown('<div class="section-title">Phylum Distribution</div>', unsafe_allow_html=True)
         df["Phylum"] = df["Lineage"].str.split().str[2]
         counts = df["Phylum"].value_counts()
@@ -148,6 +143,7 @@ elif page == "Results":
         fig, ax = plt.subplots(figsize=(8, 4))
         counts.plot(kind="bar", color="#2E7D32", ax=ax)
         st.pyplot(fig)
+
     else:
         st.info("Upload a FASTA file first.")
 
@@ -163,11 +159,9 @@ elif page == "Visualizations":
         df = pd.read_csv(RESULT_CSV)
         matrix = np.load("vector_matrix.npy")
 
-        # Use Plotly for interactive UMAP
-        if os.path.exists(CLUSTER_IMG):  # show static PNG too
+        if os.path.exists(CLUSTER_IMG):
             st.image(CLUSTER_IMG, caption="Static UMAP Plot", use_column_width=True)
 
-        # Interactive UMAP if 2+ points
         if matrix.shape[0] > 1:
             reducer = __import__("umap").UMAP(n_components=2, random_state=42)
             reduced = reducer.fit_transform(matrix)
@@ -184,6 +178,7 @@ elif page == "Visualizations":
                 color="Organism"
             )
             st.plotly_chart(fig, use_container_width=True)
+
         else:
             st.info("Only one sequence found — clustering not applicable.")
     else:
@@ -210,7 +205,6 @@ elif page == "FASTA Preview":
 # =====================================================================
 # DEVELOPER TAB
 # =====================================================================
-
 elif page == "Developer Info":
 
     st.subheader("Team: CRISPR_CREW")
@@ -228,12 +222,6 @@ elif page == "Developer Info":
     st.write("- Sanju Rohilla")
     st.write("- Ritu Bhoi")
     st.write("- Saloni Chauhan")
-
-
-
-
-
-
 
 # =====================================================================
 # FOOTER
