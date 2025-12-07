@@ -1,4 +1,6 @@
-SampleID,MatchedID,Organism,Lineage,Score
-too_short,NR_177730.1,Pseudanabaena foetida var. intermedia,Bacteria Bacillati Cyanobacteriota Cyanophyceae Pseudanabaenales Pseudanabaenaceae Pseudanabaena.,0.097
-many_N,NR_176477.1,Microcoleus acremannii,Bacteria Bacillati Cyanobacteriota Cyanophyceae Oscillatoriophycideae Oscillatoriales Microcoleaceae Microcoleus.,0.776
-low_complexity,NR_145617.1,Streptomyces fabae,Bacteria Bacillati Actinomycetota Actinomycetes Kitasatosporales Streptomycetaceae Streptomyces.,0.135
+SampleID,MatchedID,Organism,Lineage,ReferenceMarineFlag,RawScore,DL_MarineScore,HybridScore,NoveltyScore,NoveltyType,HabitatConsensus,ConfidenceScore
+NR_042589.1,NR_042589.1,Brucella pseudogrignonensis,Bacteria Pseudomonadati Pseudomonadota Alphaproteobacteria Hyphomicrobiales Brucellaceae Brucella/Ochrobactrum group Brucella.,No,1.000,0.001,0.500,1.000,Potential novel species,Non-marine (DL + ref agree),0.000
+NR_042588.1,NR_042588.1,Brucella haematophila,Bacteria Pseudomonadati Pseudomonadota Alphaproteobacteria Hyphomicrobiales Brucellaceae Brucella/Ochrobactrum group Brucella.,No,1.000,0.003,0.502,0.546,Divergent strain,Non-marine (DL + ref agree),0.228
+NR_042585.1,NR_114844.1,Companilactobacillus paralimentarius,Bacteria Bacillati Bacillota Bacilli Lactobacillales Lactobacillaceae Companilactobacillus.,No,0.727,0.960,0.843,0.100,Known,Marine-like (DL only),0.759
+NR_042523.1,NR_042523.1,Limosilactobacillus secaliphilus,Bacteria Bacillati Bacillota Bacilli Lactobacillales Lactobacillaceae Limosilactobacillus.,No,1.000,0.913,0.956,0.000,Known,Marine-like (DL only),0.956
+NR_042514.1,NR_042514.1,Levilactobacillus namurensis,Bacteria Bacillati Bacillota Bacilli Lactobacillales Lactobacillaceae Levilactobacillus.,No,1.000,0.927,0.963,0.009,Known,Marine-like (DL only),0.955
