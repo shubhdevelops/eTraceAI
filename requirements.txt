@@ -1,7 +1,0 @@
-biopython
-pandas
-numpy
-plotly
-matplotlib
-scikit-learn
-umap-learn

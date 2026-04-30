@@ -1,0 +1,57 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Documentation
+*.md
+README.md
+docs/
+
+# Logs
+*.log
+
+# Windows BLAST executables (we'll use Linux version)
+blast+/**/*.exe
+blast+/**/*.manifest
+
+# Test files
+test/
+tests/
+*.test.py
+
+# Large files that should be downloaded separately
+*.tar.gz
+*.zip
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# OS
+Thumbs.db

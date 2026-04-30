@@ -1,0 +1,46 @@
+services:
+  - type: web
+    name: etraceai-frontend
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          name: etraceai-backend
+          type: web
+          property: url
+    rootDir: frontend
+
+  - type: web
+    name: etraceai-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          name: etraceai-redis
+          type: redis
+          property: connectionString
+    rootDir: backend
+
+  - type: worker
+    name: etraceai-ml-worker
+    env: python
+    buildCommand: pip install -r requirements.txt && pip install celery redis
+    startCommand: celery -A app.worker.tasks worker --loglevel=info
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          name: etraceai-redis
+          type: redis
+          property: connectionString
+      - key: PYTHONPATH
+        value: /opt/render/project/src/backend
+    rootDir: ml_service
+
+  - type: redis
+    name: etraceai-redis
+    ipAllowList: [] # internal only
+    plan: free
