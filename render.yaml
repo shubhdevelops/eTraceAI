@@ -1,16 +1,4 @@
 services:
-  - type: web
-    name: etraceai-frontend
-    env: node
-    buildCommand: npm install && npm run build
-    startCommand: npm run start
-    envVars:
-      - key: NEXT_PUBLIC_API_URL
-        fromService:
-          name: etraceai-backend
-          type: web
-          property: url
-    rootDir: frontend
 
   - type: web
     name: etraceai-backend
