@@ -126,14 +126,14 @@ export default function Home() {
 
       <div className="max-w-7xl mx-auto px-6 py-12 relative z-10">
         
-        <header className="flex justify-between items-center mb-12">
+        <header className="flex flex-col sm:flex-row justify-between items-center gap-6 mb-12">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
               <Dna className="w-6 h-6 text-white" />
             </div>
             <h1 className="text-2xl font-bold tracking-tight">eTrace<span className="text-blue-400">AI</span></h1>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap justify-center items-center gap-4">
             <Link href="/about" className="px-4 py-2 rounded-lg bg-blue-600/10 text-blue-400 hover:bg-blue-600/20 border border-blue-500/20 font-semibold transition-all text-sm flex items-center gap-2">
               <Info className="w-4 h-4" /> Architecture & Developer Info
             </Link>
@@ -150,8 +150,8 @@ export default function Home() {
 
         {jobStatus === 'SUCCESS' && jobResult ? (
           <div className="w-full space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <div className="flex justify-between items-end mb-8">
-              <h2 className="text-3xl font-bold">Advanced Analysis Dashboard</h2>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
+              <h2 className="text-2xl sm:text-3xl font-bold">Advanced Analysis Dashboard</h2>
               <button 
                 onClick={handleDownloadCSV}
                 className="px-4 py-2 rounded-lg bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-600/30 font-semibold transition-all text-sm flex items-center gap-2"
@@ -161,7 +161,7 @@ export default function Home() {
             </div>
             
             {/* Genomics Metrics Row */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
               <MetricCard title="Total Reads" value={jobResult.metrics?.total_sequences || 0} colorClass="text-white" />
               <MetricCard title="Marine Match" value={jobResult.metrics?.marine_like || 0} colorClass="text-blue-400" />
               <MetricCard title="Deep-Sea Novelty" value={jobResult.metrics?.potential_novel || 0} colorClass="text-rose-400" />
@@ -301,7 +301,7 @@ export default function Home() {
                 GPU Cluster Active
               </div>
               
-              <h2 className="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
+              <h2 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
                 Decode <span className="text-gradient">Biological</span> Presence.
               </h2>
               
@@ -310,8 +310,8 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="flex-1 w-full max-w-md">
-              <div className="glass-card rounded-2xl p-8 relative overflow-hidden">
+            <div className="flex-1 w-full max-w-md mx-auto lg:mx-0">
+              <div className="glass-card rounded-2xl p-6 sm:p-8 relative overflow-hidden">
                 <h3 className="text-xl font-semibold mb-2">New Analysis Job</h3>
                 <p className="text-sm text-zinc-400 mb-6">Upload your FASTA or FASTQ sequence file.</p>
 
