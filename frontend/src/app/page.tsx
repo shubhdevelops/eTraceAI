@@ -293,14 +293,7 @@ export default function Home() {
         ) : (
           <div className="flex flex-col lg:flex-row gap-16 items-start">
             <div className="flex-1 space-y-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border-blue-500/30 text-blue-400 text-xs font-semibold uppercase tracking-wider mb-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                </span>
-                GPU Cluster Active
-              </div>
-              
+
               <h2 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
                 Decode <span className="text-gradient">Biological</span> Presence.
               </h2>

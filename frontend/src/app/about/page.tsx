@@ -73,43 +73,77 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Feature Uniqueness */}
+        {/* Interview Defense & Technical Deep Dive */}
         <section>
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold tracking-tight mb-4">What Makes eTraceAI Unique?</h2>
-            <p className="text-zinc-400 max-w-2xl mx-auto">Key architectural and scientific differentiators to highlight during technical interviews.</p>
+            <h2 className="text-3xl font-bold tracking-tight mb-4">Technical Interview Defense Guide</h2>
+            <p className="text-zinc-400 max-w-2xl mx-auto">Key architectural concepts, design decisions, and common interview questions tackled during the platform's evolution.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="glass-card p-6 rounded-xl border border-blue-500/20 hover:border-blue-500/40 transition-colors group">
-              <div className="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center mb-4 text-blue-400 group-hover:scale-110 transition-transform">
-                <Network className="w-6 h-6" />
+          <div className="space-y-8">
+            {/* Topic 1: Message Queues & Microservices */}
+            <div className="glass-card p-8 rounded-xl border border-blue-500/20">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400">
+                  <Server className="w-6 h-6" />
+                </div>
+                <h3 className="text-2xl font-bold">Why Redis & Celery? (Producer-Consumer Pattern)</h3>
               </div>
-              <h3 className="text-lg font-bold mb-2">Deep DNA Embeddings</h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">
-                Instead of basic exact-match searches (like BLAST), we use Transformer-based sequence representations. This captures semantic biological meaning, allowing us to project sequences into a 2D UMAP space to discover entirely novel species that share structural similarities.
+              <p className="text-zinc-300 leading-relaxed mb-6">
+                <strong>The Problem:</strong> ML inference (processing 500MB FASTA files through a Transformer model) takes a long time. If the FastAPI server handles this synchronously, the HTTP request will timeout, the server will block other users, and the UI will freeze.
               </p>
+              <p className="text-zinc-300 leading-relaxed mb-6">
+                <strong>The Solution:</strong> I implemented a <em>Producer-Consumer</em> architecture. 
+                <br />1. The <strong>Producer</strong> (FastAPI) receives the file, saves it, and immediately pushes a "Job Ticket" to Redis. It replies to the user in milliseconds: "Job Queued."
+                <br />2. The <strong>Message Broker</strong> (Redis) safely stores the queue of jobs in memory.
+                <br />3. The <strong>Consumer</strong> (Celery Worker), which has access to the GPU, constantly pulls jobs from Redis, processes them, and writes the results back to Redis.
+              </p>
+              <div className="bg-black/30 p-4 rounded-lg border border-white/5">
+                <p className="text-sm font-semibold text-blue-400 mb-2">Q: "What happens if the Celery worker crashes during inference?"</p>
+                <p className="text-sm text-zinc-400">A: Because Redis retains the state, we can configure Celery to acknowledge the task <em>only after</em> it succeeds (using `acks_late=True`). If the worker crashes, the task is returned to the queue, and another worker (or the restarted worker) will pick it up, guaranteeing no data loss.</p>
+              </div>
             </div>
 
-            <div className="glass-card p-6 rounded-xl border border-purple-500/20 hover:border-purple-500/40 transition-colors group">
-              <div className="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4 text-purple-400 group-hover:scale-110 transition-transform">
-                <Server className="w-6 h-6" />
+            {/* Topic 2: Prototype to Production */}
+            <div className="glass-card p-8 rounded-xl border border-purple-500/20">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400">
+                  <Network className="w-6 h-6" />
+                </div>
+                <h3 className="text-2xl font-bold">Prototype to Production: What Changed?</h3>
               </div>
-              <h3 className="text-lg font-bold mb-2">Non-Blocking Architecture</h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">
-                Bioinformatics workflows take minutes to hours. This platform is built specifically for long-running AI jobs using the producer-consumer pattern (FastAPI → Redis → Celery). The frontend actively polls job status via WebSockets/REST, delivering an enterprise-tier UX.
-              </p>
+              <ul className="space-y-4 text-zinc-300 list-disc pl-5 mb-6">
+                <li><strong>State Management:</strong> In the prototype (Streamlit), state was held in the browser session. Now, state is strictly managed on the server via `job_id` polling. The frontend is completely stateless, making it infinitely scalable.</li>
+                <li><strong>Decoupling UI from Compute:</strong> Previously, if the Python script crashed due to OOM (Out of Memory) on the GPU, the entire website went down. Now, if the ML Worker crashes, the Next.js frontend and FastAPI gateway remain 100% operational, and the user simply sees a gracefully handled "Job Failed" status.</li>
+                <li><strong>Client-Side Rendering (CSR):</strong> The old app generated static PNG plots on the server and sent them down. This wasted server CPU. Now, the server only sends raw JSON data. The client browser uses its own CPU to render interactive Recharts graphs, saving massive server costs.</li>
+                <li><strong>Deployment Economics:</strong> The monolithic design required expensive servers because the web server needed a GPU. By decoupling, the frontend (Next.js) can be hosted on a free CDN (Vercel), the API (FastAPI) on a cheap CPU server, and only the Celery worker needs an expensive GPU instance.</li>
+              </ul>
+              <div className="bg-black/30 p-4 rounded-lg border border-white/5">
+                <p className="text-sm font-semibold text-purple-400 mb-2">Q: "Why use Next.js if you aren't using Server-Side Rendering (SSR) for the plots?"</p>
+                <p className="text-sm text-zinc-400">A: Next.js provides an incredibly robust API for routing and component structure, but more importantly, it allows us to deploy directly to Vercel's Edge Network. Even though the dashboard uses CSR (`use client`), the shell of the application is static, resulting in instantaneous page loads.</p>
+              </div>
             </div>
 
-            <div className="glass-card p-6 rounded-xl border border-emerald-500/20 hover:border-emerald-500/40 transition-colors group">
-              <div className="w-12 h-12 rounded-lg bg-emerald-500/20 flex items-center justify-center mb-4 text-emerald-400 group-hover:scale-110 transition-transform">
-                <ShieldCheck className="w-6 h-6" />
+            {/* Topic 3: AI Architecture */}
+            <div className="glass-card p-8 rounded-xl border border-emerald-500/20">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+                  <Cpu className="w-6 h-6" />
+                </div>
+                <h3 className="text-2xl font-bold">The AI: Deep DNA Embeddings vs BLAST</h3>
               </div>
-              <h3 className="text-lg font-bold mb-2">Scalable Infrastructure</h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">
-                By decoupling the frontend from the ML execution engine, we can horizontally scale the `ml_worker` containers independently based on GPU demand, without affecting the lightweight frontend or API gateway. It's ready for Kubernetes orchestration.
+              <p className="text-zinc-300 leading-relaxed mb-6">
+                <strong>Traditional Approach (BLAST):</strong> Bioinformatics tools historically rely on exact character-matching. If a sequence has mutated heavily, BLAST fails to recognize it because the letters don't align.
               </p>
+              <p className="text-zinc-300 leading-relaxed mb-6">
+                <strong>Our Approach (Transformers):</strong> We use a Deep Learning Transformer model that creates <em>embeddings</em> (high-dimensional vectors). The model learns the "grammar" of the DNA rather than just the spelling. This is why our UMAP projection works: sequences that are biologically similar (even if mutated) group together in the vector space, allowing us to detect completely novel deep-sea organisms that BLAST would ignore.
+              </p>
+              <div className="bg-black/30 p-4 rounded-lg border border-white/5">
+                <p className="text-sm font-semibold text-emerald-400 mb-2">Q: "How do you handle the massive size of genomic datasets?"</p>
+                <p className="text-sm text-zinc-400">A: Memory management is critical. We process FASTA files in generator chunks (streaming) rather than loading a 500MB file entirely into RAM. The ML inference is batched so we don't exceed GPU VRAM limits.</p>
+              </div>
             </div>
+
           </div>
         </section>
 
