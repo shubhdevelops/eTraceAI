@@ -46,3 +46,11 @@ reference_db/
 *.nin
 *.nsq
 nul
+
+# Private Documentation
+INTERVIEW_DEFENSE_GUIDE.md
+ChatGPT_Interview_Prep.md
+WHITEBOOK.md
+CHANGES_SUMMARY.md
+AGENTS.md
+CLAUDE.md
