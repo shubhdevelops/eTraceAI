@@ -1,12 +1,8 @@
-from celery import Celery
 import os
 import random
 import time
+import json
 
-redis_url = os.getenv("REDIS_URL", "redis://localhost:6379/0")
-celery_app = Celery("edna_tasks", broker=redis_url, backend=redis_url)
-
-@celery_app.task
 def run_inference(job_id: str, file_path: str):
     print(f"Starting advanced inference for job {job_id} on file {file_path}")
     
@@ -78,7 +74,7 @@ def run_inference(job_id: str, file_path: str):
 
     print(f"Completed inference for job {job_id}")
     
-    return {
+    result = {
         "job_id": job_id,
         "metrics": {
             "total_sequences": num_sequences,
@@ -93,3 +89,9 @@ def run_inference(job_id: str, file_path: str):
         "gc_distribution": gc_distribution,
         "length_distribution": length_distribution
     }
+    
+    os.makedirs("/tmp/edna_jobs", exist_ok=True)
+    with open(f"/tmp/edna_jobs/{job_id}.json", "w") as f:
+        json.dump({"status": "SUCCESS", "result": result}, f)
+        
+    return result

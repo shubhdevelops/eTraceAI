@@ -1,4 +1,4 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException
+from fastapi import APIRouter, UploadFile, File, HTTPException, BackgroundTasks
 import uuid
 import os
 import shutil
@@ -9,7 +9,7 @@ UPLOAD_DIR = "/tmp/edna_uploads" # Use S3 in production
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 @router.post("/")
-async def upload_sequence(file: UploadFile = File(...)):
+async def upload_sequence(background_tasks: BackgroundTasks, file: UploadFile = File(...)):
     if not file.filename.endswith(('.fasta', '.fa', '.txt')):
         raise HTTPException(status_code=400, detail="Only .fasta or .txt files allowed")
 
@@ -20,6 +20,6 @@ async def upload_sequence(file: UploadFile = File(...)):
         shutil.copyfileobj(file.file, buffer)
         
     from app.worker.tasks import run_inference
-    run_inference.apply_async(args=[job_id, file_path], task_id=job_id)
+    background_tasks.add_task(run_inference, job_id, file_path)
     
     return {"job_id": job_id, "status": "pending", "message": "File uploaded and job queued"}
